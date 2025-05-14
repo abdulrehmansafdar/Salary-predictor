@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Salary Prediction Results</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-bar"></i> Your Salary Prediction</h1>
+            <p>Based on machine learning analysis and AI insights</p>
+        </header>
+        
+        <main>
+            <section class="result-container">
+                <div class="result-box">
+                    <h2><i class="fas fa-user-clock"></i> Your Profile</h2>
+                    <p class="input-summary">Professional with <strong>{{ years_experience }}</strong> years of experience</p>
+                    
+                    <div class="prediction">
+                        <h3><i class="fas fa-money-bill-wave"></i> Predicted Salary</h3>
+                        <p class="predicted-value">{{ predicted_salary }}</p>
+                        <!-- Copy button will be added by JavaScript -->
+                    </div>
+                    
+                    <div class="prediction-disclaimer">
+                        <p><small>This prediction is based on a trained Linear Regression model and should be used as an estimate only.</small></p>
+                    </div>
+                </div>
+                
+                <div class="gemini-insights">
+                    <h2><i class="fas fa-robot"></i> AI Career Insights</h2>
+                    <div class="gemini-content">
+                        {% if gemini_response %}
+                            {{ gemini_response|safe }}
+                        {% else %}
+                            <div class="ai-fallback">
+                                <h3>Career Insights</h3>
+                                <p>Sorry, we couldn't generate personalized career insights at this time. Here are some general tips:</p>
+                                <ul>
+                                    <li>Research industry salary standards for your experience level</li>
+                                    <li>Focus on acquiring in-demand skills to increase your market value</li>
+                                    <li>Consider professional certifications relevant to your field</li>
+                                    <li>Network with professionals in similar roles across different companies</li>
+                                    <li>Track your accomplishments to strengthen future negotiations</li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="result-box">
+                    <h2><i class="fas fa-chart-line"></i> Market Context</h2>
+                    <p>Your predicted salary is based on a model trained with real market data. Several factors can influence actual compensation including:</p>
+                    <ul>
+                        <li>Geographic location and cost of living</li>
+                        <li>Industry sector and company size</li>
+                        <li>Technical specialization and skill set</li>
+                        <li>Education level and certifications</li>
+                    </ul>
+                    <p><em>Consider these factors when evaluating this prediction against your personal situation.</em></p>
+                </div>
+            </section>
+            
+            <div class="action-buttons">
+                <a href="/" class="btn back-btn"><i class="fas fa-arrow-left"></i> Make Another Prediction</a>
+                <button id="share-btn" class="btn share-btn"><i class="fas fa-share-alt"></i> Share Result</button>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Salary Predictor | ML Model + Gemini API Integration</p>
+            <p><small>Created with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for AI Lab Final</small></p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='share.js') }}"></script>
+</body>
+</html>
